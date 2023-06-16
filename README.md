@@ -1,6 +1,6 @@
 # NY Times Search App
 
-Overview
+# Overview
 
 This project is a simple search application utilizing the New York Times API to fetch and display articles. Users can search for articles using keywords.
 
@@ -20,16 +20,19 @@ Node.js installed on your machine
 An API key from the New York Times API
 
 # Installation
-1- Clone this repository by running git clone <https://github.com/carolrs/news-article> in your terminal.
-2- Install the necessary dependencies with npm install or yarn install.
-3- Create a .env file in the root of your project.
-4- Inside this file, you should set your New York Times API Key like this:
+* Clone this repository by running git clone <https://github.com/carolrs/news-article> in your terminal.
+
+* Install the necessary dependencies with npm install or yarn install.
+
+* Create a .env file in the root of your project.
+
+* Inside this file, you should set your New York Times API Key like this:
 
 ```
 REACT_APP_NYT_API_KEY=your_api_key_here
 
 ```
-5- Run the project locally with npm start or yarn start.
+* Run the project locally with npm start or yarn start.
 
 Your app should now be running on `localhost:3000`.
 
@@ -39,4 +42,4 @@ Simply type your search term in the search bar and press 'Search'. The results w
 
 # Acknowledgements
 
-This project was created following the ReactJs News App using the New York Times Articles API tutorial on YouTube. All credit goes to the original author.
+This project was created following the ReactJs News App using the New York Times Articles API tutorial on YouTube(https://www.youtube.com/watch?v=m2aYEl14ekY).
