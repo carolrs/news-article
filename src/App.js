@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 
 const App = ()=> {
   const [articles, setArticles] = useState([])
-  const [term, seTerm] = useState('everything') 
+  const [term, setTerm] = useState('everything') 
   const [isLoading, setIsLoading] = useState(true) //display loading animation
   
   useEffect(()=>{
@@ -22,30 +22,34 @@ const App = ()=> {
   return (
     <>
     <div className="showcase">
-      <div className="overlay">
-        <h1>Viewing articles about {term} </h1>
+      <div className="overlay px-5">
+        <h1 className="text-4x1 font-bold text-white text-center mb-4">
+          Viewing articles about {term} 
+          </h1>
 
       </div>
 
       </div>
-    <section>
+
+    <section className="grid grid-cols-1 gap-10 px-5 pt-10 pb-20"> 
       {articles.map((article)=>{
-        const{abstract, headline,byline:{original} , lead_paragraph, news_desk,
+        const{abstract, headline:{main},byline:{original} , lead_paragraph, news_desk,
       section_name, web_url, _id, word_count} = article
 
       return (
-        <article key={_id}>
-          <h2>{headline.main}</h2>
-          <h4>{abstract}</h4>
-          <a href= {web_url} target="_blank">Read More</a>
+        <article key={_id} className="bg-white py-10 px-5 rounded-lg">
+          <h2 className="font-bold text-2x1 mb-2">{main}</h2>
+          <p>{abstract}</p>
           <p>{lead_paragraph}</p>
 
-          <ul>
+          <ul className="my-4">
             <li>{original}</li>
-            <li>{news_desk}</li>
-            <li>{section_name}</li>
-            <li>{word_count}</li>
+            <li><span className="font-bold">News Desk:</span> {news_desk}</li>
+            <li><span className="font-bold">Section Name:</span> {section_name}</li>
+            <li><span className="font-bold">Word Count:</span> {word_count}</li>
           </ul>
+          <a href= {web_url} target="_blank" className="underline">Web Resource</a>
+
 
 
           </article>
