@@ -21,6 +21,13 @@ const App = ()=> {
   }, [])
   return (
     <>
+    <div className="showcase">
+      <div className="overlay">
+        <h1>Viewing articles about {term} </h1>
+
+      </div>
+
+      </div>
     <section>
       {articles.map((article)=>{
         const{abstract, headline,byline:{original} , lead_paragraph, news_desk,
@@ -32,6 +39,13 @@ const App = ()=> {
           <h4>{abstract}</h4>
           <a href= {web_url} target="_blank">Read More</a>
           <p>{lead_paragraph}</p>
+
+          <ul>
+            <li>{original}</li>
+            <li>{news_desk}</li>
+            <li>{section_name}</li>
+            <li>{word_count}</li>
+          </ul>
 
 
           </article>
