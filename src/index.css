@@ -1,14 +1,11 @@
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Times New Roman', Times, serif;
     background-color: #eee;
-
 }
 
 .showcase{
-  background: url("https://images.pexels.com/photos/935979/pexels-photo-935979.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2") no-repeat right/cover; 
-  height: 400px;
+  background: url("https://images.pexels.com/photos/6802042/pexels-photo-6802042.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1") no-repeat right/cover; 
+  height: 500px;
   display: flex;
   flex-direction: column;
 
@@ -19,7 +16,13 @@ body {
   height: 400px;
   display: flex;
   flex-direction: column;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+@media (min-width: 1024px){
+  .showcase {
+    background: url("https://images.pexels.com/photos/6802042/pexels-photo-6802042.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1") no-repeat right/cover; 
+
+  }
 }
