@@ -2,6 +2,9 @@
 
 # Overview
 
+# News
+![Class System Design Drawing](docs/news.gif?raw=true "News")
+
 This project is a simple search application utilizing the New York Times API to fetch and display articles. Users can search for articles using keywords.
 
 The application is built with React and relies heavily on hooks (useState and useEffect) to manage state and side effects.
