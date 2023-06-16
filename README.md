@@ -1,6 +1,6 @@
 # NY Times Search App
 
-Overview
+# Overview
 
 This project is a simple search application utilizing the New York Times API to fetch and display articles. Users can search for articles using keywords.
 
@@ -39,4 +39,4 @@ Simply type your search term in the search bar and press 'Search'. The results w
 
 # Acknowledgements
 
-This project was created following the ReactJs News App using the New York Times Articles API tutorial on YouTube. All credit goes to the original author.
+This project was created following the ReactJs News App using the New York Times Articles API tutorial on YouTube(https://www.youtube.com/watch?v=m2aYEl14ekY).
