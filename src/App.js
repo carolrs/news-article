@@ -23,6 +23,17 @@ const App = ()=> {
   }, [term])
   return (
     <>
+    <header className="py-5 px-10 bg-white flex justify-between items-center">
+    <h1>NY Times Search App</h1>
+    <nav>
+      <ul className="flex space-x-10">
+        <li className="Home">Home</li>
+        <li>About</li>
+        <li>Contact</li>
+      </ul>
+    </nav>
+    
+  </header>
     <div className="showcase">
       <div className="overlay px-5">
       <h1 className="text-4xl font-bold text-white text-center mb-4 capitalize lg:text-7xl">

@@ -1,6 +1,7 @@
 body {
   font-family: 'Times New Roman', Times, serif;
-    background-color: #eee;
+  background-color: #f7f7f7;
+  color: #333;
 }
 
 .showcase{
@@ -8,11 +9,10 @@ body {
   height: 500px;
   display: flex;
   flex-direction: column;
-
 }
 
 .showcase .overlay{
-  background: rgba(0,0,0,0.2);
+  background: rgba(0,0,0,0.4);
   height: 400px;
   display: flex;
   flex-direction: column;
@@ -20,9 +20,17 @@ body {
   align-items: center;
 }
 
-@media (min-width: 1024px){
-  .showcase {
-    background: url("https://images.pexels.com/photos/6802042/pexels-photo-6802042.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1") no-repeat right/cover; 
-
-  }
+article {
+  border-bottom: 1px solid #ccc;
+  padding: 15px 0;
 }
+
+h1, h2, h3, h4, h5, h6 {
+  color: #333;
+}
+
+a {
+  color: #326891;
+}
+
+/* Adicione mais estilos aqui para corresponder ao estilo da página do NY Times */
