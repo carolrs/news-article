@@ -158,7 +158,6 @@ button {
 }
 
 button[disabled] {
-  background-color: #dad1d1; /* some gray */
   cursor: not-allowed;
 }
 .parent-container {
