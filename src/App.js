@@ -35,7 +35,7 @@ const App = () => {
         article.classList.remove("bg-white")
         article.classList.add('dark-mode-article')
         article.querySelector('h2').classList.add('color-white')
-    })
+      })
     } else {
       document.body.classList.remove("dark-mode");
       document.querySelectorAll('article').forEach(article => {
@@ -43,9 +43,19 @@ const App = () => {
         article.classList.add("bg-white")
         article.classList.remove('dark-mode-article')
         article.querySelector('h2').classList.remove('color-white')
-      })      
+      })
     }
   }, [isDarkMode]);
+
+  const shareArticle = (url) => {
+    // Use the Web Share API to share the article URL
+    if (navigator.share) {
+      navigator.share({ url });
+    } else {
+      // Fallback for browsers that don't support the Web Share API
+      window.open(url, '_blank');
+    }
+  };
 
   return (
     <div>
@@ -74,10 +84,10 @@ const App = () => {
       <div className="showcase">
         <div className="overlay px-5">
           <h1 className="text-4xl font-bold text-white text-center mb-4 capitalize lg:text-7xl">
-          Discover Your Next Reading
+            Discover Your Next Reading
           </h1>
           <h1 className="text-2xl font-bold text-white text-center mb-4 capitalize lg:text-4xl">
-          Today news: {term}
+            Today news: {term}
           </h1>
           <SearchForm searchText={(text) => setTerm(text)} />
         </div>
@@ -131,6 +141,12 @@ const App = () => {
                 >
                   Read More
                 </a>
+                <button
+                    className="share-button"
+                    onClick={() => shareArticle(web_url)}
+                  >
+                    Share
+                  </button>
               </article>
             );
           })}

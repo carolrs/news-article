@@ -125,3 +125,21 @@ article {
 .mode{
   cursor: pointer;
 }
+
+.article-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.share-button {
+  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(15, 15, 15);
+  font-weight: bold;
+  padding: 5px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  float: right;
+}
+
+
