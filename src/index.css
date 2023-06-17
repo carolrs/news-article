@@ -161,12 +161,20 @@ button[disabled] {
   background-color: #dad1d1; /* some gray */
   cursor: not-allowed;
 }
+.parent-container {
+  position: relative;
+}
 
 .popup{
-  width: 30%;
+  transform: translateX(100%);
+  width: 35%;
   align-items: center;
+  border-radius: 0.5rem;
   justify-content: center;
+  opacity: 0.8;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+
 .popup div {
   background-color: #ffffff;
   padding: 20px;
@@ -179,6 +187,8 @@ button[disabled] {
 .popup h3 {
   font-size: 20px;
   margin-bottom: 10px;
+  font-weight: bold;
+
 }
 
 .popup p {
@@ -189,6 +199,20 @@ button[disabled] {
   color: rgb(99, 99, 234);
   text-decoration: none;
 }
+.read-later{
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: underline;
+
+}
+.action-buttons {
+  justify-content: space-between;
+  display: flex;
+}
+
+
 
 
 

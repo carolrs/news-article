@@ -14,7 +14,6 @@ const App = () => {
   const [readLaterArticles, setReadLaterArticles] = useState([]);
   const [isReadLaterOpen, setIsReadLaterOpen] = useState(false);
 
-
   const [backgroundImage, setBackgroundImage] = useState(
     "https://images.pexels.com/photos/6802042/pexels-photo-6802042.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
   );
@@ -22,7 +21,7 @@ const App = () => {
   const backgrounds = [
     "https://images.pexels.com/photos/6802042/pexels-photo-6802042.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     "https://images.pexels.com/photos/6802043/pexels-photo-6802043.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    "https://images.pexels.com/photos/7788006/pexels-photo-7788006.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+    "https://images.pexels.com/photos/7788006/pexels-photo-7788006.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
   ];
 
   useEffect(() => {
@@ -34,9 +33,6 @@ const App = () => {
     const intervalId = setInterval(changeBackground, 5000); // 5000 milissegundos = 5 segundos
     return () => clearInterval(intervalId); // Limpar o intervalo quando o componente for desmontado
   }, []);
-  
-  
-  
 
   useEffect(() => {
     const fetchArticles = async () => {
@@ -85,14 +81,15 @@ const App = () => {
   };
   const addToReadLater = (article) => {
     // Verifique se o artigo já está na lista
-    if (!readLaterArticles.some((readLaterArticle) => readLaterArticle._id === article._id)) {
+    if (
+      !readLaterArticles.some(
+        (readLaterArticle) => readLaterArticle._id === article._id
+      )
+    ) {
       const newArticles = [...readLaterArticles, article];
       setReadLaterArticles(newArticles);
-      console.log('Artigos para ler mais tarde:', newArticles);
     }
   };
-  
-  
 
   return (
     <div>
@@ -125,7 +122,10 @@ const App = () => {
         <ContactsModal onClose={() => setIsContactsOpen(false)} />
       )}
 
-<div className="showcase" style={{ backgroundImage: `url(${backgroundImage})` }}>
+      <div
+        className="showcase"
+        style={{ backgroundImage: `url(${backgroundImage})` }}
+      >
         <div className="overlay px-5">
           <h1 className="text-4xl font-bold text-white text-center mb-4 capitalize lg:text-7xl">
             Discover Your Next Reading
@@ -162,7 +162,6 @@ const App = () => {
               _id,
               word_count,
             } = article;
-
             return (
               <article
                 key={_id}
@@ -185,38 +184,41 @@ const App = () => {
                     <span className="font-bold">Word Count:</span> {word_count}
                   </li>
                 </ul>
-                <a
-                  href={web_url}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="underline"
-                >
-                  Read More
-                </a>
-                <a href={`mailto:?body=${web_url}`} className="share-button">
-                  <i className="fas fa-share"></i> Share
-                </a>
-                <button className="read-later" onClick={() => addToReadLater(article)}>
-Read later</button>
+                <div className="action-buttons">
+                  <a
+                    href={web_url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="underline"
+                  >
+                    Read More
+                  </a>
+                  <a href={`mailto:?body=${web_url}`} className="share-button">
+                    <i className="fas fa-share"></i> Share
+                  </a>
+                  <a className="read-later" onClick={() => addToReadLater(article)}>
+            Read later
+          </a>
+                </div>
               </article>
-              
-              
             );
           })}
-          <button onClick={() => setIsReadLaterOpen(true)}>
-  Ver artigos para ler mais tarde
+         <button onClick={() => setIsReadLaterOpen(!isReadLaterOpen)}>
+  Articles saved
 </button>
 {isReadLaterOpen && (
   <div className="popup">
-    <button onClick={() => setIsReadLaterOpen(false)}>Fechar</button>
-    <h2>Artigos para ler mais tarde</h2>
     {readLaterArticles.map((article) => {
       return (
         <div key={article._id}>
           <h3>{article.headline.main}</h3>
           <p>{article.abstract}</p>
-          <a href={article.web_url} target="_blank" rel="noopener noreferrer">
-            Ler este artigo
+          <a
+            href={article.web_url}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Read this article
           </a>
         </div>
       );
@@ -224,10 +226,7 @@ Read later</button>
   </div>
 )}
 
-
         </section>
-        
-        
       )}
     </div>
   );
