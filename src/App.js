@@ -30,20 +30,20 @@ const App = () => {
   useEffect(() => {
     if (isDarkMode) {
       document.body.classList.add("dark-mode");
-      document.querySelectorAll('article').forEach(article => {
-        article.classList.add("bg-black")
-        article.classList.remove("bg-white")
-        article.classList.add('dark-mode-article')
-        article.querySelector('h2').classList.add('color-white')
-      })
+      document.querySelectorAll("article").forEach((article) => {
+        article.classList.add("bg-black");
+        article.classList.remove("bg-white");
+        article.classList.add("dark-mode-article");
+        article.querySelector("h2").classList.add("color-white");
+      });
     } else {
       document.body.classList.remove("dark-mode");
-      document.querySelectorAll('article').forEach(article => {
-        article.classList.remove("bg-black")
-        article.classList.add("bg-white")
-        article.classList.remove('dark-mode-article')
-        article.querySelector('h2').classList.remove('color-white')
-      })
+      document.querySelectorAll("article").forEach((article) => {
+        article.classList.remove("bg-black");
+        article.classList.add("bg-white");
+        article.classList.remove("dark-mode-article");
+        article.querySelector("h2").classList.remove("color-white");
+      });
     }
   }, [isDarkMode]);
 
@@ -53,7 +53,7 @@ const App = () => {
       navigator.share({ url });
     } else {
       // Fallback for browsers that don't support the Web Share API
-      window.open(url, '_blank');
+      window.open(url, "_blank");
     }
   };
 
@@ -129,8 +129,7 @@ const App = () => {
                     {section_name}
                   </li>
                   <li>
-                    <span className="font-bold">Word Count:</span>{" "}
-                    {word_count}
+                    <span className="font-bold">Word Count:</span> {word_count}
                   </li>
                 </ul>
                 <a
@@ -141,12 +140,13 @@ const App = () => {
                 >
                   Read More
                 </a>
-                <button
-                    className="share-button"
-                    onClick={() => shareArticle(web_url)}
-                  >
-                    Share
-                  </button>
+                <a
+                  href="#"
+                  className="share-button"
+                  onClick={() => shareArticle(web_url)}
+                >
+                  <i className="fas fa-share"></i> Share
+                </a>
               </article>
             );
           })}

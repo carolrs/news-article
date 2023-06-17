@@ -134,12 +134,14 @@ article {
 
 .share-button {
   font-family: Arial, Helvetica, sans-serif;
-  color: rgb(15, 15, 15);
+  color: rgb(62, 128, 182);
   font-weight: bold;
   padding: 5px 12px;
   border-radius: 6px;
   cursor: pointer;
   float: right;
+  text-decoration: underline;
 }
+
 
 
