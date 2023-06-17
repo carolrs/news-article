@@ -98,6 +98,9 @@ article {
 .about {
   cursor: pointer;
 }
+.subscribe {
+  cursor: pointer;
+}
 
 .contact {
   cursor: pointer;

@@ -70,13 +70,20 @@ const App = () => {
             <li className="contact" onClick={() => setIsContactsOpen(true)}>
               Contact
             </li>
+            <li
+              className="subscribe"
+              onClick={() =>
+                window.open("https://www.nytimes.com/subscription", "_blank")
+              }
+            >
+              Subscribe
+            </li>
             <li className="mode" onClick={() => setIsDarkMode(!isDarkMode)}>
               {isDarkMode ? "Light Mode" : "Dark Mode"}
             </li>
           </ul>
         </nav>
       </header>
-
       {isAboutOpen && <AboutModal onClose={() => setIsAboutOpen(false)} />}
       {isContactsOpen && (
         <ContactsModal onClose={() => setIsContactsOpen(false)} />
@@ -94,13 +101,14 @@ const App = () => {
         </div>
       </div>
       <section className="pagination-container">
-  <button onClick={() => setPage(page > 0 ? page - 1 : page)} disabled={page === 0}>
-    Previous Page
-  </button>
-  <button onClick={() => setPage(page + 1)}>
-    Next Page
-  </button>
-</section>
+        <button
+          onClick={() => setPage(page > 0 ? page - 1 : page)}
+          disabled={page === 0}
+        >
+          Previous Page
+        </button>
+        <button onClick={() => setPage(page + 1)}>Next Page</button>
+      </section>
 
       {isLoading ? (
         <h1 className="text-center mt-20 font-bold text-5xl">Loading...</h1>
