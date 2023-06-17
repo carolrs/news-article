@@ -74,7 +74,10 @@ const App = () => {
       <div className="showcase">
         <div className="overlay px-5">
           <h1 className="text-4xl font-bold text-white text-center mb-4 capitalize lg:text-7xl">
-            Viewing articles about {term}
+          Discover Your Next Reading
+          </h1>
+          <h1 className="text-2xl font-bold text-white text-center mb-4 capitalize lg:text-4xl">
+          Today news: {term}
           </h1>
           <SearchForm searchText={(text) => setTerm(text)} />
         </div>
