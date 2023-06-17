@@ -10,12 +10,13 @@ const App = () => {
   const [isAboutOpen, setIsAboutOpen] = useState(false);
   const [isContactsOpen, setIsContactsOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [page, setPage] = useState(0);
 
   useEffect(() => {
     const fetchArticles = async () => {
       try {
         const res = await fetch(
-          `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${term}&api-key=${process.env.REACT_APP_NYT_API_KEY}`
+          `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${term}&page=${page}&api-key=${process.env.REACT_APP_NYT_API_KEY}`
         );
         const articles = await res.json();
         setArticles(articles.response.docs);
@@ -25,7 +26,7 @@ const App = () => {
       }
     };
     fetchArticles();
-  }, [term]);
+  }, [term, page]);
 
   useEffect(() => {
     if (isDarkMode) {
@@ -92,6 +93,14 @@ const App = () => {
           <SearchForm searchText={(text) => setTerm(text)} />
         </div>
       </div>
+      <section className="pagination-container">
+  <button onClick={() => setPage(page > 0 ? page - 1 : page)} disabled={page === 0}>
+    Previous Page
+  </button>
+  <button onClick={() => setPage(page + 1)}>
+    Next Page
+  </button>
+</section>
 
       {isLoading ? (
         <h1 className="text-center mt-20 font-bold text-5xl">Loading...</h1>

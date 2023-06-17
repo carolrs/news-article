@@ -141,6 +141,27 @@ article {
   float: right;
   text-decoration: underline;
 }
+.pagination-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 0;
+}
+button {
+  padding: 10px 20px;
+  margin: 5px;
+  font-size: 1em;
+  cursor: pointer;
+  color: rgb(62, 128, 182);
+  border: none;
+  border-radius: 3px;
+  text-decoration: none;
+}
+
+button[disabled] {
+  background-color: #cccccc; /* some gray */
+  cursor: not-allowed;
+}
+
 
 
 
