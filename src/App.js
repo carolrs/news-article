@@ -1,10 +1,14 @@
 import React, {useState, useEffect} from "react";
 import SearchForm from "./SearchForm";
+import AboutModal from "./AboutModal";
+import ContactsModal from "./ContactModal";
 
 const App = ()=> {
   const [articles, setArticles] = useState([])
   const [term, setTerm] = useState('everything') 
   const [isLoading, setIsLoading] = useState(true) //display loading animation
+  const [isAboutOpen, setIsAboutOpen] = useState(false) // estado para controlar a exibição do modal
+  const [isContactsOpen, setIsContactsOpen] = useState(false) // estado para controlar a exibição do modal
   
   useEffect(()=>{
     const fetchArticles = async ()=>{
@@ -27,13 +31,14 @@ const App = ()=> {
     <h1>NY Times Search App</h1>
     <nav>
       <ul className="flex space-x-10">
-        <li className="Home">Home</li>
-        <li>About</li>
-        <li>Contact</li>
+        <li className="about" onClick={() => setIsAboutOpen(true)}>About</li> {/* Ao clicar, abre o modal */}
+        <li className="contact" onClick={() => setIsContactsOpen(true)}>Contact</li> {/* Ao clicar, abre o modal */}
       </ul>
     </nav>
     
   </header>
+  {isAboutOpen && <AboutModal onClose={() => setIsAboutOpen(false)} />} 
+  {isContactsOpen && <ContactsModal onClose={() => setIsContactsOpen(false)} />} {/* Se isContactsOpen for verdadeiro, exibe o modal */}
     <div className="showcase">
       <div className="overlay px-5">
       <h1 className="text-4xl font-bold text-white text-center mb-4 capitalize lg:text-7xl">
