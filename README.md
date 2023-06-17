@@ -5,18 +5,21 @@
 # News
 ![Class System Design Drawing](docs/news.gif?raw=true "News")
 
-This project is a simple search application utilizing the New York Times API to fetch and display articles. Users can search for articles using keywords.
+This project is a search application that utilizes the New York Times API to fetch and display articles. The original version of this project was created by following the tutorial "ReactJs News App using the New York Times Articles API" on YouTube(https://www.youtube.com/watch?v=m2aYEl14ekY). However, I have added new features and personalized the CSS to make it my own.
 
-The application is built with React and relies heavily on hooks (useState and useEffect) to manage state and side effects.
+The new features I have added include:
 
-This project was created while following along with the YouTube tutorial "ReactJs News App using the New York Times Articles API".
+* A navigation bar with "About" and "Contact" sections.
+* A dark mode feature.
+* Share functionality using the Web Share API.
+
+The application is built with React and makes use of hooks such as useState and useEffect to manage state and side effects.
 
 # Features
 
 Search for articles
 Display article information (headline, abstract, lead paragraph, author, news desk, section name, word count)
 Links to the full articles
-Setup
 
 # Pre-requisites
 Node.js installed on your machine
@@ -45,4 +48,4 @@ Simply type your search term in the search bar and press 'Search'. The results w
 
 # Acknowledgements
 
-This project was created following the ReactJs News App using the New York Times Articles API tutorial on YouTube(https://www.youtube.com/watch?v=m2aYEl14ekY).
+This project was initially created by following the tutorial "ReactJs News App using the New York Times Articles API" on YouTube(https://www.youtube.com/watch?v=m2aYEl14ekY). I have extended the project by adding new features and customizing the CSS.
