@@ -10,7 +10,7 @@ body {
 }
 
 .showcase {
-  background: url("https://images.pexels.com/photos/6802042/pexels-photo-6802042.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1") no-repeat right/cover;
+  background: no-repeat right/cover;
   height: 500px;
   display: flex;
   flex-direction: column;
@@ -150,18 +150,15 @@ article {
   padding: 20px 0;
 }
 button {
-  padding: 10px 20px;
-  margin: 5px;
+  
   font-size: 1em;
   cursor: pointer;
   color: rgb(62, 128, 182);
-  border: none;
-  border-radius: 3px;
-  text-decoration: none;
+  
 }
 
 button[disabled] {
-  background-color: #cccccc; /* some gray */
+  background-color: #dad1d1; /* some gray */
   cursor: not-allowed;
 }
 

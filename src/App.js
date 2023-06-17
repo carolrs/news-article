@@ -5,12 +5,34 @@ import ContactsModal from "./ContactModal";
 
 const App = () => {
   const [articles, setArticles] = useState([]);
-  const [term, setTerm] = useState("everything");
+  const [term, setTerm] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [isAboutOpen, setIsAboutOpen] = useState(false);
   const [isContactsOpen, setIsContactsOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [page, setPage] = useState(0);
+  const [backgroundImage, setBackgroundImage] = useState(
+    "https://images.pexels.com/photos/6802042/pexels-photo-6802042.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+  );
+
+  const backgrounds = [
+    "https://images.pexels.com/photos/6802042/pexels-photo-6802042.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "https://images.pexels.com/photos/6802043/pexels-photo-6802043.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "https://images.pexels.com/photos/7788006/pexels-photo-7788006.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+  ];
+
+  useEffect(() => {
+    let i = 0;
+    const changeBackground = () => {
+      setBackgroundImage(backgrounds[i % backgrounds.length]);
+      i++;
+    };
+    const intervalId = setInterval(changeBackground, 5000); // 5000 milissegundos = 5 segundos
+    return () => clearInterval(intervalId); // Limpar o intervalo quando o componente for desmontado
+  }, []);
+  
+  
+  
 
   useEffect(() => {
     const fetchArticles = async () => {
@@ -89,7 +111,7 @@ const App = () => {
         <ContactsModal onClose={() => setIsContactsOpen(false)} />
       )}
 
-      <div className="showcase">
+<div className="showcase" style={{ backgroundImage: `url(${backgroundImage})` }}>
         <div className="overlay px-5">
           <h1 className="text-4xl font-bold text-white text-center mb-4 capitalize lg:text-7xl">
             Discover Your Next Reading
