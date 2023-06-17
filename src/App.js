@@ -11,6 +11,10 @@ const App = () => {
   const [isContactsOpen, setIsContactsOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [page, setPage] = useState(0);
+  const [readLaterArticles, setReadLaterArticles] = useState([]);
+  const [isReadLaterOpen, setIsReadLaterOpen] = useState(false);
+
+
   const [backgroundImage, setBackgroundImage] = useState(
     "https://images.pexels.com/photos/6802042/pexels-photo-6802042.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
   );
@@ -79,6 +83,16 @@ const App = () => {
       window.open(url, "_blank");
     }
   };
+  const addToReadLater = (article) => {
+    // Verifique se o artigo já está na lista
+    if (!readLaterArticles.some((readLaterArticle) => readLaterArticle._id === article._id)) {
+      const newArticles = [...readLaterArticles, article];
+      setReadLaterArticles(newArticles);
+      console.log('Artigos para ler mais tarde:', newArticles);
+    }
+  };
+  
+  
 
   return (
     <div>
@@ -182,10 +196,38 @@ const App = () => {
                 <a href={`mailto:?body=${web_url}`} className="share-button">
                   <i className="fas fa-share"></i> Share
                 </a>
+                <button className="read-later" onClick={() => addToReadLater(article)}>
+Read later</button>
               </article>
+              
+              
             );
           })}
+          <button onClick={() => setIsReadLaterOpen(true)}>
+  Ver artigos para ler mais tarde
+</button>
+{isReadLaterOpen && (
+  <div className="popup">
+    <button onClick={() => setIsReadLaterOpen(false)}>Fechar</button>
+    <h2>Artigos para ler mais tarde</h2>
+    {readLaterArticles.map((article) => {
+      return (
+        <div key={article._id}>
+          <h3>{article.headline.main}</h3>
+          <p>{article.abstract}</p>
+          <a href={article.web_url} target="_blank" rel="noopener noreferrer">
+            Ler este artigo
+          </a>
+        </div>
+      );
+    })}
+  </div>
+)}
+
+
         </section>
+        
+        
       )}
     </div>
   );

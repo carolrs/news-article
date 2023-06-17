@@ -162,6 +162,33 @@ button[disabled] {
   cursor: not-allowed;
 }
 
+.popup{
+  width: 30%;
+  align-items: center;
+  justify-content: center;
+}
+.popup div {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 5px;
+  max-width: 500px;
+  margin: 0 auto;
+  height: auto;
+
+}
+.popup h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.popup p {
+  margin-bottom: 10px;
+}
+
+.popup a {
+  color: rgb(99, 99, 234);
+  text-decoration: none;
+}
 
 
 
