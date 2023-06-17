@@ -140,11 +140,7 @@ const App = () => {
                 >
                   Read More
                 </a>
-                <a
-                  href="#"
-                  className="share-button"
-                  onClick={() => shareArticle(web_url)}
-                >
+                <a href={`mailto:?body=${web_url}`} className="share-button">
                   <i className="fas fa-share"></i> Share
                 </a>
               </article>
