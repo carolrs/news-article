@@ -7,17 +7,24 @@ This project is a search application that utilizes the New York Times and OpenWe
 
 # New Features Included by me:
 
-* A navigation bar with "About" and "Contact" sections.
-* A dark mode feature.
-* Share functionality using the Web Share API
-* Pagination system to navigate through articles.
-* Read Later function to save articles for future reading.
-* A list to display all the articles saved for reading later.
-* Subscribe button that redirects to the New York Times subscription page.
-* Weather information feature, using the OpenWeatherMap API.
-* Dynamic background
+- **Navigation Bar**: Navigate through different sections like "About" and "Contact".
+- **Dark Mode**: A feature to switch between light and dark themes.
+- **Web Share API**: Share articles easily using the Web Share API.
+- **Pagination**: Navigate through different articles using the pagination system.
+- **Read Later Function**: Save articles for reading later.
+- **List of Saved Articles**: Access all the articles you've saved for reading later.
+- **Subscription**: Subscribe button that redirects to the New York Times subscription page.
+- **Weather Information**: This feature shows weather information of the user's current location using the OpenWeatherMap API.
+- **Dynamic Background**: The background of the weather information changes according to the weather.
+- **Geolocation**: The application retrieves the user's current location and uses it to fetch weather information.
 
-The application is built with React and makes use of hooks such as useState and useEffect to manage state and side effects.
+## Weather Information with Geolocation
+
+The weather information feature uses the OpenWeatherMap API to fetch current weather information based on the user's geolocation. It uses the `navigator.geolocation` web API to get the current location of the user (latitude and longitude). If the geolocation service is not enabled or available, it defaults to a predefined location.
+
+Additionally, this feature includes a dynamic background that changes based on the weather. For example, if it's snowing, the background image will be one that suits a snowy atmosphere. The images are fetched from Pexels API.
+
+The geolocation feature is safe to use as it only accesses the location data when the user permits it. If the user doesn't allow location access, the feature won't work but the application will continue to function normally.
 
 # Original Features 
 
