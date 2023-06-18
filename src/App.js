@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import SearchForm from "./SearchForm";
 import AboutModal from "./AboutModal";
 import ContactsModal from "./ContactModal";
+import Weather from './Weather';
+
 
 const App = () => {
   const [articles, setArticles] = useState([]);
@@ -13,6 +15,8 @@ const App = () => {
   const [page, setPage] = useState(0);
   const [readLaterArticles, setReadLaterArticles] = useState([]);
   const [isReadLaterOpen, setIsReadLaterOpen] = useState(false);
+  const [isWeatherPopupOpen, setIsWeatherPopupOpen] = useState(false);
+
 
   const [backgroundImage, setBackgroundImage] = useState(
     "https://images.pexels.com/photos/6802042/pexels-photo-6802042.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
@@ -80,7 +84,6 @@ const App = () => {
     }
   };
   const addToReadLater = (article) => {
-    // Verifique se o artigo já está na lista
     if (
       !readLaterArticles.some(
         (readLaterArticle) => readLaterArticle._id === article._id
@@ -92,9 +95,11 @@ const App = () => {
   };
 
   return (
+
     <div>
+
       <header className="py-5 px-10 bg-white flex justify-between items-center">
-        <h1>NY Times Search App</h1>
+        <h1>NY Times Search</h1>
         <nav>
           <ul className="flex space-x-10">
             <li className="about" onClick={() => setIsAboutOpen(true)}>
@@ -114,6 +119,9 @@ const App = () => {
             <li className="mode" onClick={() => setIsDarkMode(!isDarkMode)}>
               {isDarkMode ? "Light Mode" : "Dark Mode"}
             </li>
+            <li className="weather" style={{cursor: 'pointer'}}  onClick={() => setIsWeatherPopupOpen(true)}>
+        Weather
+      </li>
           </ul>
         </nav>
       </header>
@@ -121,6 +129,11 @@ const App = () => {
       {isContactsOpen && (
         <ContactsModal onClose={() => setIsContactsOpen(false)} />
       )}
+{isWeatherPopupOpen && (
+  <div className="popup active">
+    <Weather onClose={() => setIsWeatherPopupOpen(false)} />
+  </div>
+)}
 
       <div
         className="showcase"
@@ -207,7 +220,7 @@ const App = () => {
   Articles saved
 </button>
 {isReadLaterOpen && (
-  <div className="popup">
+  <div className="popup-read-later">
     {readLaterArticles.map((article) => {
       return (
         <div key={article._id}>
