@@ -243,6 +243,7 @@ button[disabled] {
 
 .popup p {
   margin-bottom: 10px;
+  font-size: larger;
 }
 
 .popup a {
