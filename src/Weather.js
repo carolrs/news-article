@@ -4,41 +4,51 @@ const Weather = ({onClose}) => {
   const [weatherData, setWeatherData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [bgImageUrl, setBgImageUrl] = useState(""); 
-  const city = "Edinburg"; // cidade predefinida
+  const [latitude, setLatitude] = useState(null);
+  const [longitude, setLongitude] = useState(null);
 
   const bgImageWarm = "https://images.pexels.com/photos/1049298/pexels-photo-1049298.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2";
   const bgImageCold = "https://images.pexels.com/photos/4406191/pexels-photo-4406191.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2";
   const bgImageSnow = "https://images.pexels.com/photos/15835820/pexels-photo-15835820/free-photo-of-snowy-mountain-in-birds-eye-view.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2";
 
   useEffect(() => {
-    fetch(`http://api.openweathermap.org/data/2.5/weather?units=metric&q=${city}&appid=a3d9eb01d4de82b9b8d0849ef604dbed`)
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          setWeatherData(result);
-          setIsLoading(false);
-          const mainWeather = result.weather[0].main; // "Clouds", "Clear", "Snow", etc.
-          switch (mainWeather) {
-            case 'Clear':
-              setBgImageUrl(bgImageWarm);
-              break;
-            case 'Clouds':
-            case 'Rain':
-              setBgImageUrl(bgImageCold);
-              break;
-            case 'Snow':
-              setBgImageUrl(bgImageSnow);
-              break;
-            default:
-              setBgImageUrl(bgImageCold);
-          }
-        },
-        (error) => {
-          setIsLoading(true);
-          console.log(error);
-        }
-      );
+    navigator.geolocation.getCurrentPosition(function(position) {
+      setLatitude(position.coords.latitude);
+      setLongitude(position.coords.longitude);
+    });
   }, []);
+
+  useEffect(() => {
+    if (latitude && longitude) {
+      fetch(`http://api.openweathermap.org/data/2.5/weather?units=metric&lat=${latitude}&lon=${longitude}&appid=a3d9eb01d4de82b9b8d0849ef604dbed`)
+        .then((res) => res.json())
+        .then(
+          (result) => {
+            setWeatherData(result);
+            setIsLoading(false);
+            const mainWeather = result.weather[0].main; // "Clouds", "Clear", "Snow", etc.
+            switch (mainWeather) {
+              case 'Clear':
+                setBgImageUrl(bgImageWarm);
+                break;
+              case 'Clouds':
+              case 'Rain':
+                setBgImageUrl(bgImageCold);
+                break;
+              case 'Snow':
+                setBgImageUrl(bgImageSnow);
+                break;
+              default:
+                setBgImageUrl(bgImageCold);
+            }
+          },
+          (error) => {
+            setIsLoading(true);
+            console.log(error);
+          }
+        );
+    }
+  }, [latitude, longitude]);
 
   const handleCloseModal = () => {
     onClose();
