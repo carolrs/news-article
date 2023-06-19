@@ -1,6 +1,6 @@
 # NY Times Search App
 
-![Class System Design Drawing](docs/news-ny.gif?raw=true "News")
+![Class System Design Drawing](docs/news-articles-ny.gif?raw=true "News")
 
 # Overview
 This project is a search application that utilizes the New York Times and OpenWeatherMap API to fetch and display articles and information about the Weather. The original version of this project was created by following the tutorial "ReactJs News App using the New York Times Articles API" on YouTube(https://www.youtube.com/watch?v=m2aYEl14ekY). However, I have added new features and personalized the all CSS to make it my own.
