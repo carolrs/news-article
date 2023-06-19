@@ -18,7 +18,6 @@ const App = () => {
   const [isWeatherPopupOpen, setIsWeatherPopupOpen] = useState(false);
   const [isSubscriptionOpen, setIsSubscriptionOpen] = useState(false);
 
-
   const [backgroundImage, setBackgroundImage] = useState(
     "https://images.pexels.com/photos/6802042/pexels-photo-6802042.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
   );
@@ -182,23 +181,31 @@ const App = () => {
               web_url,
               _id,
               word_count,
-              multimedia
+              multimedia,
             } = article;
 
-            const image = multimedia.find((media) => media.subtype === 'xlarge');
-  const imageUrl = image ? `https://www.nytimes.com/${image.url}` : 'url-alternativa-aqui';
+            const image = multimedia.find(
+              (media) => media.subtype === "xlarge"
+            );
+            const imageUrl = image
+              ? `https://www.nytimes.com/${image.url}`
+              : "url-alternativa-aqui";
 
             return (
               <article
                 key={_id}
                 className="bg-white py-10 px-5 rounded-lg lg:w-9/12 lg:mx-auto"
               >
-                
+                <div className="image-article">
                 <img 
-  src={imageUrl} 
-  alt={main} 
-  onError={(e)=>{e.target.onerror = null; e.target.src="URL de imagem alternativa aqui"}}
-/>
+                  src={imageUrl}
+                  alt={main}
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = "https://images.pexels.com/photos/935979/pexels-photo-935979.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1";
+                  }}
+                />
+                </div>
 
                 <h2 className="font-bold text-3xl mb-5 lg:text-4xl">{main}</h2>
                 <p>{abstract}</p>
