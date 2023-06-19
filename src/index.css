@@ -28,7 +28,18 @@ body {
 article {
   border-bottom: 1px solid #ccc;
   padding: 15px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
+
+.section-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 2rem;
+  padding: 1rem;
+}
+
 
 h1, h2, h3, h4, h5, h6 {
   color: #333;
@@ -273,4 +284,13 @@ button[disabled] {
   justify-content: center;
   align-items: center;
   border-radius: 5px;
+}
+.rating {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+}
+.rating span {
+  font-size: 20px;
 }
