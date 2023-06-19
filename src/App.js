@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import SearchForm from "./SearchForm";
 import AboutModal from "./AboutModal";
 import ContactsModal from "./ContactModal";
-import Weather from './Weather';
-
+import Weather from "./Weather";
+import SubscriptionForm from "./SubscriptionForm";
 
 const App = () => {
   const [articles, setArticles] = useState([]);
@@ -16,6 +16,7 @@ const App = () => {
   const [readLaterArticles, setReadLaterArticles] = useState([]);
   const [isReadLaterOpen, setIsReadLaterOpen] = useState(false);
   const [isWeatherPopupOpen, setIsWeatherPopupOpen] = useState(false);
+  const [isSubscriptionOpen, setIsSubscriptionOpen] = useState(false);
 
 
   const [backgroundImage, setBackgroundImage] = useState(
@@ -95,9 +96,7 @@ const App = () => {
   };
 
   return (
-
     <div>
-
       <header className="py-5 px-10 bg-white flex justify-between items-center">
         <h1>NY Times Search</h1>
         <nav>
@@ -110,18 +109,27 @@ const App = () => {
             </li>
             <li
               className="subscribe"
-              onClick={() =>
-                window.open("https://www.nytimes.com/subscription", "_blank")
-              }
+              onClick={() => setIsSubscriptionOpen(true)}
             >
               Subscribe
             </li>
+            {isSubscriptionOpen && (
+              <div className="modal">
+                <SubscriptionForm
+                  onClose={() => setIsSubscriptionOpen(false)}
+                />
+              </div>
+            )}
             <li className="mode" onClick={() => setIsDarkMode(!isDarkMode)}>
               {isDarkMode ? "Light Mode" : "Dark Mode"}
             </li>
-            <li className="weather" style={{cursor: 'pointer'}}  onClick={() => setIsWeatherPopupOpen(true)}>
-        Weather
-      </li>
+            <li
+              className="weather"
+              style={{ cursor: "pointer" }}
+              onClick={() => setIsWeatherPopupOpen(true)}
+            >
+              Weather
+            </li>
           </ul>
         </nav>
       </header>
@@ -129,11 +137,11 @@ const App = () => {
       {isContactsOpen && (
         <ContactsModal onClose={() => setIsContactsOpen(false)} />
       )}
-{isWeatherPopupOpen && (
-  <div className="popup active">
-    <Weather onClose={() => setIsWeatherPopupOpen(false)} />
-  </div>
-)}
+      {isWeatherPopupOpen && (
+        <div className="popup active">
+          <Weather onClose={() => setIsWeatherPopupOpen(false)} />
+        </div>
+      )}
 
       <div
         className="showcase"
@@ -174,12 +182,24 @@ const App = () => {
               web_url,
               _id,
               word_count,
+              multimedia
             } = article;
+
+            const image = multimedia.find((media) => media.subtype === 'xlarge');
+  const imageUrl = image ? `https://www.nytimes.com/${image.url}` : 'url-alternativa-aqui';
+
             return (
               <article
                 key={_id}
                 className="bg-white py-10 px-5 rounded-lg lg:w-9/12 lg:mx-auto"
               >
+                
+                <img 
+  src={imageUrl} 
+  alt={main} 
+  onError={(e)=>{e.target.onerror = null; e.target.src="URL de imagem alternativa aqui"}}
+/>
+
                 <h2 className="font-bold text-3xl mb-5 lg:text-4xl">{main}</h2>
                 <p>{abstract}</p>
                 <p>{lead_paragraph}</p>
@@ -209,36 +229,38 @@ const App = () => {
                   <a href={`mailto:?body=${web_url}`} className="share-button">
                     <i className="fas fa-share"></i> Share
                   </a>
-                  <a className="read-later" onClick={() => addToReadLater(article)}>
-            Read later
-          </a>
+                  <a
+                    className="read-later"
+                    onClick={() => addToReadLater(article)}
+                  >
+                    Read later
+                  </a>
                 </div>
               </article>
             );
           })}
-         <button onClick={() => setIsReadLaterOpen(!isReadLaterOpen)}>
-  Articles saved
-</button>
-{isReadLaterOpen && (
-  <div className="popup-read-later">
-    {readLaterArticles.map((article) => {
-      return (
-        <div key={article._id}>
-          <h3>{article.headline.main}</h3>
-          <p>{article.abstract}</p>
-          <a
-            href={article.web_url}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read this article
-          </a>
-        </div>
-      );
-    })}
-  </div>
-)}
-
+          <button onClick={() => setIsReadLaterOpen(!isReadLaterOpen)}>
+            Articles saved
+          </button>
+          {isReadLaterOpen && (
+            <div className="popup-read-later">
+              {readLaterArticles.map((article) => {
+                return (
+                  <div key={article._id}>
+                    <h3>{article.headline.main}</h3>
+                    <p>{article.abstract}</p>
+                    <a
+                      href={article.web_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Read this article
+                    </a>
+                  </div>
+                );
+              })}
+            </div>
+          )}
         </section>
       )}
     </div>
