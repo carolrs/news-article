@@ -4,6 +4,9 @@ import AboutModal from "./AboutModal";
 import ContactsModal from "./ContactModal";
 import Weather from "./Weather";
 import SubscriptionForm from "./SubscriptionForm";
+import ArticleRating from "./ArticlesRating";
+import WellBeingNews from "./WellBeingNews";
+import Footer from "./Footer";
 
 const App = () => {
   const [articles, setArticles] = useState([]);
@@ -13,10 +16,9 @@ const App = () => {
   const [isContactsOpen, setIsContactsOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [page, setPage] = useState(0);
-  const [readLaterArticles, setReadLaterArticles] = useState([]);
-  const [isReadLaterOpen, setIsReadLaterOpen] = useState(false);
   const [isWeatherPopupOpen, setIsWeatherPopupOpen] = useState(false);
   const [isSubscriptionOpen, setIsSubscriptionOpen] = useState(false);
+
 
   const [backgroundImage, setBackgroundImage] = useState(
     "https://images.pexels.com/photos/6802042/pexels-photo-6802042.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
@@ -83,18 +85,9 @@ const App = () => {
       window.open(url, "_blank");
     }
   };
-  const addToReadLater = (article) => {
-    if (
-      !readLaterArticles.some(
-        (readLaterArticle) => readLaterArticle._id === article._id
-      )
-    ) {
-      const newArticles = [...readLaterArticles, article];
-      setReadLaterArticles(newArticles);
-    }
-  };
 
   return (
+    
     <div>
       <header className="py-5 px-10 bg-white flex justify-between items-center">
         <h1>NY Times Search</h1>
@@ -142,6 +135,7 @@ const App = () => {
         </div>
       )}
 
+
       <div
         className="showcase"
         style={{ backgroundImage: `url(${backgroundImage})` }}
@@ -169,7 +163,7 @@ const App = () => {
       {isLoading ? (
         <h1 className="text-center mt-20 font-bold text-5xl">Loading...</h1>
       ) : (
-        <section className="grid grid-cols-1 gap-10 px-5 pt-10 pb-20">
+        <section className="section-container grid grid-cols-1 gap-10 px-5 pt-10 pb-20">
           {articles.map((article) => {
             const {
               abstract,
@@ -235,41 +229,19 @@ const App = () => {
                   </a>
                   <a href={`mailto:?body=${web_url}`} className="share-button">
                     <i className="fas fa-share"></i> Share
-                  </a>
-                  <a
-                    className="read-later"
-                    onClick={() => addToReadLater(article)}
-                  >
-                    Read later
-                  </a>
+                  </a>    
                 </div>
+                <ArticleRating />
+
               </article>
             );
           })}
-          <button onClick={() => setIsReadLaterOpen(!isReadLaterOpen)}>
-            Articles saved
-          </button>
-          {isReadLaterOpen && (
-            <div className="popup-read-later">
-              {readLaterArticles.map((article) => {
-                return (
-                  <div key={article._id}>
-                    <h3>{article.headline.main}</h3>
-                    <p>{article.abstract}</p>
-                    <a
-                      href={article.web_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Read this article
-                    </a>
-                  </div>
-                );
-              })}
-            </div>
-          )}
         </section>
+
       )}
+  <WellBeingNews />
+  <Footer />
+
     </div>
   );
 };
