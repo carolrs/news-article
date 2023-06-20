@@ -18,7 +18,36 @@ const App = () => {
   const [page, setPage] = useState(0);
   const [isWeatherPopupOpen, setIsWeatherPopupOpen] = useState(false);
   const [isSubscriptionOpen, setIsSubscriptionOpen] = useState(false);
+  const [showScrollToTop, setShowScrollToTop] = useState(false);
 
+  const ScrollToTopButton = ({ onClick }) => (
+    <div className="scroll-to-top-card">
+      <button className="scroll-to-top" onClick={onClick}>
+        <i className="fas fa-arrow-up"></i>
+      </button>
+    </div>
+  );
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const shouldShowScrollToTop = scrollTop > 500;
+      setShowScrollToTop(shouldShowScrollToTop);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  const handleScrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
 
   const [backgroundImage, setBackgroundImage] = useState(
     "https://images.pexels.com/photos/6802042/pexels-photo-6802042.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
@@ -57,23 +86,27 @@ const App = () => {
   }, [term, page]);
 
   useEffect(() => {
-    if (isDarkMode) {
-      document.body.classList.add("dark-mode");
-      document.querySelectorAll("article").forEach((article) => {
-        article.classList.add("bg-black");
-        article.classList.remove("bg-white");
-        article.classList.add("dark-mode-article");
-        article.querySelector("h2").classList.add("color-white");
-      });
-    } else {
-      document.body.classList.remove("dark-mode");
-      document.querySelectorAll("article").forEach((article) => {
-        article.classList.remove("bg-black");
-        article.classList.add("bg-white");
-        article.classList.remove("dark-mode-article");
-        article.querySelector("h2").classList.remove("color-white");
-      });
-    }
+    const setDarkModeClass = (darkMode) => {
+      if (darkMode) {
+        document.body.classList.add("dark-mode");
+        document.querySelectorAll("article").forEach((article) => {
+          article.classList.add("bg-black");
+          article.classList.remove("bg-white");
+          article.classList.add("dark-mode-article");
+          article.querySelector("h2").classList.add("color-white");
+        });
+      } else {
+        document.body.classList.remove("dark-mode");
+        document.querySelectorAll("article").forEach((article) => {
+          article.classList.remove("bg-black");
+          article.classList.add("bg-white");
+          article.classList.remove("dark-mode-article");
+          article.querySelector("h2").classList.remove("color-white");
+        });
+      }
+    };
+
+    setDarkModeClass(isDarkMode);
   }, [isDarkMode]);
 
   const shareArticle = (url) => {
@@ -87,12 +120,11 @@ const App = () => {
   };
 
   return (
-    
     <div>
       <header className="py-5 px-10 bg-white flex justify-between items-center">
         <h1>NY Times Search</h1>
         <nav>
-          <ul className="flex space-x-10">
+          <ul className="flex space-x-10 position">
             <li className="about" onClick={() => setIsAboutOpen(true)}>
               About
             </li>
@@ -135,7 +167,6 @@ const App = () => {
         </div>
       )}
 
-
       <div
         className="showcase"
         style={{ backgroundImage: `url(${backgroundImage})` }}
@@ -152,12 +183,14 @@ const App = () => {
       </div>
       <section className="pagination-container">
         <button
-          onClick={() => setPage(page > 0 ? page - 1 : page)}
+          onClick={() => setPage((prevPage) => Math.max(prevPage - 1, 0))}
           disabled={page === 0}
         >
           Previous Page
         </button>
-        <button onClick={() => setPage(page + 1)}>Next Page</button>
+        <button onClick={() => setPage((prevPage) => prevPage + 1)}>
+          Next Page
+        </button>
       </section>
 
       {isLoading ? (
@@ -183,7 +216,7 @@ const App = () => {
             );
             const imageUrl = image
               ? `https://www.nytimes.com/${image.url}`
-              : "url-alternativa-aqui";
+              : "https://images.pexels.com/photos/935979/pexels-photo-935979.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1";
 
             return (
               <article
@@ -191,14 +224,15 @@ const App = () => {
                 className="bg-white py-10 px-5 rounded-lg lg:w-9/12 lg:mx-auto"
               >
                 <div className="image-article">
-                <img 
-                  src={imageUrl}
-                  alt={main}
-                  onError={(e) => {
-                    e.target.onerror = null;
-                    e.target.src = "https://images.pexels.com/photos/935979/pexels-photo-935979.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1";
-                  }}
-                />
+                  <img
+                    src={imageUrl}
+                    alt={main}
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src =
+                        "https://images.pexels.com/photos/935979/pexels-photo-935979.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1";
+                    }}
+                  />
                 </div>
 
                 <h2 className="font-bold text-3xl mb-5 lg:text-4xl">{main}</h2>
@@ -229,19 +263,22 @@ const App = () => {
                   </a>
                   <a href={`mailto:?body=${web_url}`} className="share-button">
                     <i className="fas fa-share"></i> Share
-                  </a>    
+                  </a>
                 </div>
                 <ArticleRating />
-
               </article>
             );
           })}
         </section>
-
       )}
-  <WellBeingNews />
-  <Footer />
 
+      <WellBeingNews />
+
+      {showScrollToTop && (
+        <ScrollToTopButton onClick={handleScrollToTop} />
+      )}
+
+      <Footer />
     </div>
   );
 };
